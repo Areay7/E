@@ -1,0 +1,55 @@
+# OS / Editor
+.DS_Store
+Thumbs.db
+.idea/
+*.iml
+.vscode/
+
+# Java / Maven / Spring Boot
+backend/target/
+backend/out/
+*.class
+*.jar
+*.war
+*.ear
+
+# Frontend / Node / Vite
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/.cache/
+frontend/.temp/
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local env / runtime files
+.env
+.env.*
+*.local
+*.pid
+*.seed
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.swp
+*.swo
+
+# Archives / downloaded packages
+*.zip
+*.tar
+*.gz
+*.tgz
+*.rar
+*.7z
+
+# Keep source files, markdown docs and SQL scripts tracked by default
+!*.md
+!*.sql
