@@ -29,6 +29,24 @@ const routes: RouteRecordRaw[] = [
         name: 'TikTokOrders',
         component: () => import('@/views/tk/orders.vue'),
         meta: { title: 'TikTok 订单管理' }
+      },
+      {
+        path: 'platform/config',
+        name: 'PlatformConfig',
+        component: () => import('@/views/platform/config.vue'),
+        meta: { title: '平台配置管理' }
+      },
+      {
+        path: 'products',
+        name: 'Products',
+        component: () => import('@/views/products/index.vue'),
+        meta: { title: '商品管理' }
+      },
+      {
+        path: 'inventory',
+        name: 'Inventory',
+        component: () => import('@/views/inventory/index.vue'),
+        meta: { title: '库存管理' }
       }
     ]
   },

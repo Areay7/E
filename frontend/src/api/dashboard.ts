@@ -1,22 +1,60 @@
 import { http } from './http'
-import type { DashboardSummary } from '@/types/order'
 
-function parseSummary(data: unknown): DashboardSummary {
-  if (typeof data !== 'object' || data === null) {
-    throw new Error('看板汇总响应格式错误：非对象')
-  }
-  const o = data as Record<string, unknown>
-  const todaySalesUsd = o.todaySalesUsd ?? o.today_sales_usd
-  const pendingShipment = o.pendingShipment ?? o.pending_shipment
-  const openOrders = o.openOrders ?? o.open_orders
-  if (typeof todaySalesUsd !== 'number' || typeof pendingShipment !== 'number' || typeof openOrders !== 'number') {
-    throw new Error('看板汇总字段类型不符合约定（todaySalesUsd / pendingShipment / openOrders 须为数字）')
-  }
-  return { todaySalesUsd, pendingShipment, openOrders }
+export interface PlatformStat {
+  platform: string
+  orderCount: number
+  totalAmount: number
+}
+
+export interface DailySales {
+  date: string
+  amount: number
+  count: number
+}
+
+export interface ProductSales {
+  productName: string
+  quantity: number
+  amount: number
+}
+
+export interface OrderStatusCount {
+  status: string
+  count: number
+}
+
+export interface DashboardSummary {
+  todayOrders: number
+  todaySales: number
+  pendingShipment: number
+  openOrders: number
+  lowStockCount: number
+  platformStats: PlatformStat[]
+  salesTrend: DailySales[]
+  topProducts: ProductSales[]
+  orderStatusDist: OrderStatusCount[]
+}
+
+export interface SalesReport {
+  totalOrders: number
+  totalAmount: number
+  avgAmount: number
+  paidOrders: number
+  shippedCount: number
 }
 
 /** GET /api/v1/dashboard/summary */
 export async function fetchDashboardSummary(): Promise<DashboardSummary> {
-  const { data } = await http.get<unknown>('/api/v1/dashboard/summary')
-  return parseSummary(data)
+  const { data } = await http.get<DashboardSummary>('/api/v1/dashboard/summary')
+  return data
+}
+
+/** GET /api/v1/dashboard/sales-report */
+export async function fetchSalesReport(params: {
+  startDate: string
+  endDate: string
+  platform?: string
+}): Promise<SalesReport> {
+  const { data } = await http.get<SalesReport>('/api/v1/dashboard/sales-report', { params })
+  return data
 }

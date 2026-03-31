@@ -53,3 +53,10 @@ temp/
 # Keep source files, markdown docs and SQL scripts tracked by default
 !*.md
 !*.sql
+
+# Backend specific
+backend/config/config.yaml
+backend/logs/
+backend/cross_border.db
+backend/cross-border-admin
+backend/*.db

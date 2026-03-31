@@ -1,0 +1,75 @@
+# 配置文件示例（生产环境）
+# 复制此文件为 config.yaml 并修改相应配置
+
+server:
+  port: 8080
+  mode: release  # debug, release, test
+
+database:
+  # MySQL 配置
+  type: mysql
+  host: your-mysql-host
+  port: 3306
+  username: your-username
+  password: your-password
+  dbname: cross_border_ecommerce
+  charset: utf8mb4
+  max_idle_conns: 10
+  max_open_conns: 100
+  log_level: warn
+  auto_migrate: false
+
+  # PostgreSQL 配置（如果使用 PostgreSQL，取消注释并修改）
+  # type: postgres
+  # host: your-postgres-host
+  # port: 5432
+  # username: your-username
+  # password: your-password
+  # dbname: cross_border_ecommerce
+  # sslmode: disable
+  # timezone: Asia/Shanghai
+
+jwt:
+  secret: CHANGE-THIS-TO-A-RANDOM-SECRET-KEY-IN-PRODUCTION
+  expire_hours: 24
+
+cors:
+  allow_origins:
+    - https://your-domain.com
+  allow_credentials: true
+
+log:
+  level: info
+  file_path: logs/app.log
+  max_size: 100
+  max_backups: 10
+  max_age: 30
+  compress: true
+
+# 平台 API 配置
+# 请在各平台开放平台申请应用后填写
+platforms:
+  shopee:
+    enabled: false
+    partner_id: "YOUR_PARTNER_ID"
+    partner_key: "YOUR_PARTNER_KEY"
+    shop_id: "YOUR_SHOP_ID"
+    api_url: "https://partner.shopeemobile.com"
+
+  aliexpress:
+    enabled: false
+    app_key: "YOUR_APP_KEY"
+    app_secret: "YOUR_APP_SECRET"
+    api_url: "https://api-sg.aliexpress.com/sync"
+
+  tiktok:
+    enabled: false
+    app_key: "YOUR_APP_KEY"
+    app_secret: "YOUR_APP_SECRET"
+    shop_id: "YOUR_SHOP_ID"
+    api_url: "https://open-api.tiktokglobalshop.com"
+
+sync:
+  order_interval: 300
+  product_interval: 600
+  inventory_interval: 300

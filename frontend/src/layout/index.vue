@@ -43,6 +43,21 @@
           </template>
           <el-menu-item index="/tk/orders">订单处理</el-menu-item>
         </el-sub-menu>
+
+        <el-menu-item index="/products">
+          <el-icon><Box /></el-icon>
+          <span>商品管理</span>
+        </el-menu-item>
+
+        <el-menu-item index="/inventory">
+          <el-icon><Tickets /></el-icon>
+          <span>库存管理</span>
+        </el-menu-item>
+
+        <el-menu-item index="/platform/config">
+          <el-icon><Setting /></el-icon>
+          <span>平台配置</span>
+        </el-menu-item>
       </el-menu>
     </el-aside>
 
