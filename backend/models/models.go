@@ -6,6 +6,29 @@ import (
 	"gorm.io/gorm"
 )
 
+// User 用户模型
+type User struct {
+	ID             uint           `gorm:"primarykey" json:"id"`
+	Username       string         `gorm:"type:varchar(50);uniqueIndex;not null" json:"username"`
+	Password       string         `gorm:"type:varchar(255);not null" json:"-"`
+	Nickname       string         `gorm:"type:varchar(100)" json:"nickname"`
+	Email          string         `gorm:"type:varchar(100);index" json:"email"`
+	Phone          string         `gorm:"type:varchar(20)" json:"phone"`
+	Avatar         string         `gorm:"type:varchar(500)" json:"avatar"`
+
+	Status         int            `gorm:"default:1;index" json:"status"`
+	Role           string         `gorm:"type:varchar(20);default:'user'" json:"role"`
+
+	LastLoginAt    *time.Time     `json:"lastLoginAt"`
+	LastLoginIP    string         `gorm:"type:varchar(50)" json:"lastLoginIp"`
+	LoginFailCount int            `gorm:"default:0" json:"-"`
+	LoginFailTime  *time.Time     `json:"-"`
+
+	CreatedAt      time.Time      `json:"createdAt"`
+	UpdatedAt      time.Time      `json:"updatedAt"`
+	DeletedAt      gorm.DeletedAt `gorm:"index" json:"-"`
+}
+
 // Order 订单模型
 type Order struct {
 	ID              uint           `gorm:"primarykey" json:"id"`

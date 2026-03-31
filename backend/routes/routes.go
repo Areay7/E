@@ -7,8 +7,22 @@ import (
 )
 
 func RegisterRoutes(r *gin.Engine) {
-	api := r.Group("/api/v1")
+	// 认证相关路由（无需token）
+	authHandler := handlers.NewAuthHandler()
+	auth := r.Group("/api/v1/auth")
 	{
+		auth.POST("/login", authHandler.Login)
+		auth.POST("/logout", authHandler.Logout)
+		auth.GET("/captcha", authHandler.GetCaptcha)
+	}
+
+	// 需要认证的API
+	api := r.Group("/api/v1")
+	api.Use(handlers.AuthMiddleware())
+	{
+		// 用户信息
+		api.GET("/user/current", authHandler.GetCurrentUser)
+
 		// 数据看板
 		api.GET("/dashboard/summary", handlers.GetDashboardSummary)
 		api.GET("/dashboard/sales-report", handlers.GetSalesReport)

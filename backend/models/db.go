@@ -100,6 +100,7 @@ func InitDB() error {
 // autoMigrate 自动迁移所有表
 func autoMigrate() error {
 	return DB.AutoMigrate(
+		&User{},
 		&Order{},
 		&OrderItem{},
 		&Product{},
